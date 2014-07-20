@@ -234,8 +234,6 @@ class ObjectAppender(Appender):
         
     def append(self, parent, content):
         object = content.value
-        if self.optional(content) and footprint(object) == 0:
-            return
         child = self.node(content)
         parent.append(child)
         for item in object:
