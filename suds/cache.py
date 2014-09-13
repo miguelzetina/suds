@@ -138,7 +138,10 @@ class FileCache(Cache):
         @type duration: {unit:value}
         """
         if location is None:
-            location = os.path.join(tmp(), 'suds')
+            # was getting [Errno 13] Permission denied: '/tmp/suds/suds-7591228850953044096-document.px'
+            # per https://fedorahosted.org/suds/ticket/376
+            # location = os.path.join(tmp(), 'suds')
+            location = os.path.join(tmp(), 'suds' + str(os.geteuid()))
         self.location = location
         self.duration = (None, 0)
         self.setduration(**duration)
